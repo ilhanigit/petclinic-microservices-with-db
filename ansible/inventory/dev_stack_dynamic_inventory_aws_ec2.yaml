@@ -2,15 +2,48 @@ plugin: aws_ec2
 regions:
   - "us-east-1"
 filters:
-  tag:Project: "tera-kube-ans"
-  tag:environment: "dev"
-  instance-state-name: "running"
+  "tag:Project": "tera-kube-ans"
+  "tag:environment": "dev"
+  "instance-state-name": "running"
 keyed_groups:
   - key: tags['Project']
-    prefix: "all_instances"
+    prefix: 'all_instances'
   - key: tags['Role']
-    prefix: "role"
+    prefix: 'role'
 hostnames:
   - "ip-address"
 compose:
   ansible_user: "ubuntu"
+  plugin: aws_ec2
+regions:
+  - "us-east-1"
+filters:
+  "tag:Project": "tera-kube-ans"
+  "tag:environment": "dev"
+  "instance-state-name": "running"
+keyed_groups:
+  - key: tags['Project']
+    prefix: 'all_instances'
+  - key: tags['Role']
+    prefix: 'role'
+hostnames:
+  - "ip-address"
+compose:
+  ansible_user: "ubuntu"
+plugin: aws_ec2
+regions:
+  - "us-east-1"
+filters:
+  "tag:Project": "tera-kube-ans"
+  "tag:environment": "dev"
+  "instance-state-name": "running"
+keyed_groups:
+  - key: tags['Project']
+    prefix: 'all_instances'
+  - key: tags['Role']
+    prefix: 'role'
+hostnames:
+  - "ip-address"
+compose:
+  ansible_user: "ubuntu"
+  ansible_ssh_private_key_file: /var/lib/jenkins/workspace/qa-test/${ANS_KEYPAIR}
