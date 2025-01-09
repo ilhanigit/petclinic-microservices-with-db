@@ -46,4 +46,3 @@ hostnames:
   - "ip-address"
 compose:
   ansible_user: "ubuntu"
-  ansible_ssh_private_key_file: /var/lib/jenkins/workspace/qa-test/${ANS_KEYPAIR}
