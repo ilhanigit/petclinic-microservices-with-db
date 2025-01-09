@@ -74,7 +74,7 @@ EOF
 }
 
 resource "aws_iam_role_policy_attachment" "petclinic-s3-policy" {
-  role = aws_iam_role.petclinic-master-server-s3-role
+  role = aws_iam_role.petclinic-master-server-s3-role.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess"
 }
 
