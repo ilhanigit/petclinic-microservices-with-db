@@ -103,6 +103,16 @@ pipeline {
 
         stage('Deploy App on Kubernetes cluster'){
             steps {
+                    script {
+                        echo 'Checking and Installing Helm S3 Plugin if necessary...'
+                        def pluginsList = sh(script: "helm plugin list", returnStdout: true)
+                        if (pluginsList.contains('s3')) {
+                            echo "Helm S3 plugin is already installed."
+                        } else {
+                            echo "Helm S3 plugin not found. Installing..."
+                            sh 'helm plugin install https://github.com/hypnoglow/helm-s3.git'
+                        }
+                    }
                 echo 'Deploying App on Kubernetes'
                 sh 'helm plugin install https://github.com/hypnoglow/helm-s3.git'
                 sh "envsubst < k8s/petclinic_chart/values-template.yaml > k8s/petclinic_chart/values.yaml"
